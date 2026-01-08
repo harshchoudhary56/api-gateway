@@ -1,4 +1,4 @@
-package com.school_management_system.apigateway.util;
+package com.apple.inc.gateway.util;
 
 
 import io.jsonwebtoken.Jwts;

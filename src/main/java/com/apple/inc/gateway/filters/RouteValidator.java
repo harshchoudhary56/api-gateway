@@ -1,4 +1,4 @@
-package com.school_management_system.apigateway.filters;
+package com.apple.inc.gateway.filters;
 
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;

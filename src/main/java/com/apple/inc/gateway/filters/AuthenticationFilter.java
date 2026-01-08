@@ -1,7 +1,6 @@
-package com.school_management_system.apigateway.filters;
+package com.apple.inc.gateway.filters;
 
-import com.school_management_system.apigateway.util.JwtUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.apple.inc.gateway.util.JwtUtil;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;

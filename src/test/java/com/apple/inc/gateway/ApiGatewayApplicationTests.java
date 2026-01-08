@@ -1,4 +1,4 @@
-package com.school_management_system.apigateway;
+package com.apple.inc.gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

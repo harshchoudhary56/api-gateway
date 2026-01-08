@@ -1,4 +1,4 @@
-package com.school_management_system.apigateway;
+package com.apple.inc.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

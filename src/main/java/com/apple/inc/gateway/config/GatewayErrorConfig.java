@@ -1,4 +1,4 @@
-package com.school_management_system.apigateway.config;
+package com.apple.inc.gateway.config;
 
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.context.annotation.Bean;
