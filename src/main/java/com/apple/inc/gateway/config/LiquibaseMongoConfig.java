@@ -7,26 +7,35 @@ import liquibase.resource.ClassLoaderResourceAccessor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 /**
- * Programmatic Liquibase runner for MongoDB.
+ * Programmatic Liquibase runner for MongoDB in the API Gateway.
  *
- * <p>Spring Boot's auto-configured Liquibase expects a JDBC datasource,
- * so we run Liquibase manually using the MongoDB extension.
- * The {@code liquibase-mongodb} extension registers a custom
- * {@link liquibase.database.Database} implementation that connects
- * via the standard MongoDB sync driver URI.</p>
+ * <p><b>Why is this needed?</b><br>
+ * Spring Boot's {@code LiquibaseAutoConfiguration} only supports JDBC datasources.
+ * The {@code liquibase-mongodb} extension provides a custom {@code MongoLiquibaseDatabase}
+ * implementation, but Spring Boot has no auto-configuration for it.
+ * So we must run Liquibase programmatically via a {@link CommandLineRunner}.</p>
+ *
+ * <p>Can be disabled by setting {@code spring.liquibase.mongodb.enabled=false}.</p>
  */
 @Slf4j
 @Configuration
+@ConditionalOnProperty(name = "spring.liquibase.mongodb.enabled", havingValue = "true", matchIfMissing = true)
 public class LiquibaseMongoConfig {
 
     @Value("${spring.data.mongodb.uri}")
     private String mongoUri;
 
+    @Value("${spring.liquibase.mongodb.change-log:db/changelog/master-changelog.xml}")
+    private String changeLogFile;
+
     @Bean
+    @Order(1)
     public CommandLineRunner liquibaseMongoRunner() {
         return args -> {
             log.info("Running Liquibase MongoDB migrations...");
@@ -35,7 +44,7 @@ public class LiquibaseMongoConfig {
                         .openDatabase(mongoUri, null, null, null, new ClassLoaderResourceAccessor());
 
                 try (Liquibase liquibase = new Liquibase(
-                        "db/changelog/master-changelog.xml",
+                        changeLogFile,
                         new ClassLoaderResourceAccessor(),
                         database)) {
                     liquibase.update("");
@@ -49,4 +58,3 @@ public class LiquibaseMongoConfig {
         };
     }
 }
-
