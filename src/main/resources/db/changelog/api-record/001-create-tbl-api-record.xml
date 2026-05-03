@@ -11,8 +11,10 @@
     <!-- ════════════════════════════════════════════════════════════════
          Changeset 1: Create tbl_api_record collection
          ════════════════════════════════════════════════════════════════ -->
-    <changeSet id="001-create-tbl-api-record" author="school-erp">
-        <ext:createCollection collectionName="tbl_api_record">
+    <changeSet id="001-create-api-record-schema" author="${author_1}" dbms="${database}" context="${context_development}">
+        <comment>Create api-record schema</comment>
+
+        <ext:createCollection collectionName="${api-record}">
             <ext:options>
                 {
                     validator: {
@@ -45,35 +47,35 @@
     </changeSet>
 
     <!-- ════════════════════════════════════════════════════════════════
-         Changeset 2: Create indexes for tbl_api_record
+         Changeset 2: Create indexes for api_record
          ════════════════════════════════════════════════════════════════ -->
-    <changeSet id="002-create-indexes-tbl-api-record" author="school-erp">
+    <changeSet id="002-create-indexes-tbl-api-record" author="${author_1}" dbms="${database}" context="${context_development}">
         <!-- Index on crid for fast lookups by correlation ID -->
-        <ext:createIndex collectionName="tbl_api_record">
+        <ext:createIndex collectionName="${api_record}">
             <ext:keys>{ crid: 1 }</ext:keys>
             <ext:options>{ name: "idx_crid", unique: false }</ext:options>
         </ext:createIndex>
 
         <!-- Index on createdAt for time-range queries and TTL-based cleanup -->
-        <ext:createIndex collectionName="tbl_api_record">
+        <ext:createIndex collectionName="${api_record}">
             <ext:keys>{ createdAt: -1 }</ext:keys>
             <ext:options>{ name: "idx_createdAt_desc" }</ext:options>
         </ext:createIndex>
 
         <!-- Index on targetService for per-service analytics -->
-        <ext:createIndex collectionName="tbl_api_record">
+        <ext:createIndex collectionName="${api_record}">
             <ext:keys>{ targetService: 1 }</ext:keys>
             <ext:options>{ name: "idx_targetService" }</ext:options>
         </ext:createIndex>
 
         <!-- Compound index for common query: service + time range -->
-        <ext:createIndex collectionName="tbl_api_record">
+        <ext:createIndex collectionName="${api_record}">
             <ext:keys>{ targetService: 1, createdAt: -1 }</ext:keys>
             <ext:options>{ name: "idx_targetService_createdAt" }</ext:options>
         </ext:createIndex>
 
         <!-- TTL index: auto-delete records older than 90 days -->
-        <ext:createIndex collectionName="tbl_api_record">
+        <ext:createIndex collectionName="${api_record}">
             <ext:keys>{ createdAt: 1 }</ext:keys>
             <ext:options>{ name: "idx_ttl_90days", expireAfterSeconds: 7776000 }</ext:options>
         </ext:createIndex>
