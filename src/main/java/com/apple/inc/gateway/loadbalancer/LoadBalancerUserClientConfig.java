@@ -35,8 +35,7 @@ import org.springframework.core.env.Environment;
  * </pre>
  */
 @Configuration
-@LoadBalancerClients(defaultConfiguration = GatewayLoadBalancerConfig.class)
-public class GatewayLoadBalancerConfig {
+public class LoadBalancerUserClientConfig {
 
     @Bean
     public ReactiveLoadBalancer<ServiceInstance> gatewayRoundRobinLoadBalancer(
