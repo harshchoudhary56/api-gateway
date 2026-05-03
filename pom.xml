@@ -21,6 +21,8 @@
 		<spring-cloud.version>2025.0.0</spring-cloud.version>
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
+        <jwt-version>0.11.5</jwt-version>
+        <liquibase-mongodb.version>4.29.2</liquibase-mongodb.version>
     </properties>
 
     <dependencyManagement>
@@ -82,20 +84,20 @@
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
-			<version>0.11.5</version>
+			<version>${jwt-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-impl</artifactId>
-			<version>0.11.5</version>
+            <version>${jwt-version}</version>
 			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if you prefer -->
-			<version>0.11.5</version>
+            <version>${jwt-version}</version>
 			<scope>runtime</scope>
 		</dependency>
 
@@ -122,7 +124,7 @@
 		<dependency>
 			<groupId>org.liquibase.ext</groupId>
 			<artifactId>liquibase-mongodb</artifactId>
-			<version>4.29.2</version>
+			<version>${liquibase-mongodb.version}</version>
 		</dependency>
 
 		<!-- MongoDB Sync Driver (required by Liquibase — it doesn't support the reactive driver) -->
@@ -133,26 +135,35 @@
 
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-							<version>${lombok.version}</version>
-						</path>
-					</annotationProcessorPaths>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>school-erp-snapshots</id>
+            <name>school-erp-snapshots-local</name>
+            <url>https://trialmzh4pl.jfrog.io/artifactory/school-erp-maven-snapshot-local</url>
+        </snapshotRepository>
+        <repository>
+            <id>school-erp-central</id>
+            <name>school-erp-central-local</name>
+            <url>https://trialmzh4pl.jfrog.io/artifactory/school-erp-maven-release-local</url>
+        </repository>
+    </distributionManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
