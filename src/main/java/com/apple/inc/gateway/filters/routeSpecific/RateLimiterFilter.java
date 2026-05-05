@@ -1,12 +1,14 @@
-package com.apple.inc.gateway.ratelimiting;
+package com.apple.inc.gateway.filters.routeSpecific;
 
 import com.apple.inc.gateway.constants.enums.StrategyType;
 import com.apple.inc.gateway.ratelimiting.algorithms.RateLimitStrategy;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ServerWebExchange;
 
 import java.util.Map;
 
@@ -69,7 +71,7 @@ public class RateLimiterFilter extends AbstractGatewayFilterFactory<RateLimiterF
         };
     }
 
-    private String extractClientId(org.springframework.web.server.ServerWebExchange exchange) {
+    private String extractClientId(ServerWebExchange exchange) {
         String xff = exchange.getRequest().getHeaders().getFirst("X-Forwarded-For");
         if (xff != null && !xff.isBlank()) {
             return xff.split(",")[0].trim();
@@ -83,16 +85,9 @@ public class RateLimiterFilter extends AbstractGatewayFilterFactory<RateLimiterF
      * Configuration properties for this filter.
      * Set via route config: {@code args.strategy: TOKEN_BUCKET}
      */
+    @Data
     public static class Config {
         private StrategyType strategy = StrategyType.TOKEN_BUCKET;
-
-        public StrategyType getStrategy() {
-            return strategy;
-        }
-
-        public void setStrategy(StrategyType strategy) {
-            this.strategy = strategy;
-        }
     }
 }
 

@@ -1,4 +1,4 @@
-package com.apple.inc.gateway.config;
+package com.apple.inc.gateway.config.mongodb;
 
 import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoClients;
@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@EnableReactiveMongoRepositories(basePackages = "com.apple.inc.gateway.apirecord.repository")
+@EnableReactiveMongoRepositories(basePackages = "com.apple.inc.gateway.repositories")
 public class MongoConfig {
 
     @Value("${spring.data.mongodb.uri}")

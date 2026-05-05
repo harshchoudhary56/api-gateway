@@ -1,4 +1,4 @@
-package com.apple.inc.gateway.apirecord.entity;
+package com.apple.inc.gateway.entities;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -11,7 +11,7 @@ import java.time.Instant;
  * Persisted by the gateway's global logging filter for every proxied request.
  */
 @Data
-@Document(collection = "tbl_api_record")
+@Document(collection = "api_record")
 public class ApiRecordEntity {
 
     @Id

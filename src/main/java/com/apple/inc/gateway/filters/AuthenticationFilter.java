@@ -1,5 +1,6 @@
 package com.apple.inc.gateway.filters;
 
+import com.apple.inc.gateway.config.routes.RouteValidator;
 import com.apple.inc.gateway.util.JwtUtil;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;

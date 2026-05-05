@@ -1,4 +1,4 @@
-package com.apple.inc.gateway.filters;
+package com.apple.inc.gateway.config.routes;
 
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;

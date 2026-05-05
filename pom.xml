@@ -23,6 +23,8 @@
         <maven.compiler.target>25</maven.compiler.target>
         <jwt-version>0.11.5</jwt-version>
         <liquibase-mongodb.version>4.29.2</liquibase-mongodb.version>
+        <gson.version>2.13.2</gson.version>
+        <mapstruct.version>1.6.3</mapstruct.version>
     </properties>
 
     <dependencyManagement>
@@ -106,13 +108,6 @@
 			<scope>runtime</scope>
 		</dependency>
 
-        <!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-            <scope>compile</scope>
-        </dependency>
-
 		<!-- Reactive MongoDB for API request/response audit logging -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -137,6 +132,25 @@
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongodb-driver-sync</artifactId>
 		</dependency>
+
+        <!-- Source: https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-circuitbreaker-resilience4j -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-circuitbreaker-resilience4j</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
+
+        <!-- Source: https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
 
 	</dependencies>
 

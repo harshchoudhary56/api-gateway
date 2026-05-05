@@ -1,4 +1,4 @@
-package com.apple.inc.gateway.config;
+package com.apple.inc.gateway.config.liquibase;
 
 import liquibase.Liquibase;
 import liquibase.database.Database;
@@ -34,6 +34,9 @@ public class LiquibaseMongoConfig {
     @Value("${spring.liquibase.mongodb.change-log:db/changelog/master-changelog.xml}")
     private String changeLogFile;
 
+    @Value("${spring.liquibase.mongodb.contexts:development}")
+    private String contexts;
+
     @Bean
     @Order(1)
     public CommandLineRunner liquibaseMongoRunner() {
@@ -47,7 +50,7 @@ public class LiquibaseMongoConfig {
                         changeLogFile,
                         new ClassLoaderResourceAccessor(),
                         database)) {
-                    liquibase.update("");
+                    liquibase.update(contexts);
                 }
 
                 log.info("Liquibase MongoDB migrations completed successfully.");
