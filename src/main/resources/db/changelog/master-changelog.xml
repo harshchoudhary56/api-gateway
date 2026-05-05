@@ -35,6 +35,7 @@
 <!--    </preConditions>-->
 
     <include file="db/changelog/api-record/001-create-tbl-api-record.xml"/>
+    <include file="db/changelog/api-record/002-insert-sample-record.xml"/>
 
 </databaseChangeLog>
 
