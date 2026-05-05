@@ -1,6 +1,6 @@
 package com.apple.inc.gateway.ratelimiting.algorithms.impl;
 
-import com.apple.inc.gateway.constants.enums.StrategyBeanNames;
+import com.apple.inc.gateway.constants.StrategyBeanNames;
 import com.apple.inc.gateway.ratelimiting.algorithms.RateLimitStrategy;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

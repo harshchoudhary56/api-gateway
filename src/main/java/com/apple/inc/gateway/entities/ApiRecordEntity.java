@@ -1,5 +1,6 @@
 package com.apple.inc.gateway.entities;
 
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,6 +12,7 @@ import java.time.Instant;
  * Persisted by the gateway's global logging filter for every proxied request.
  */
 @Data
+@Builder
 @Document(collection = "api_record")
 public class ApiRecordEntity {
 

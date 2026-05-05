@@ -1,6 +1,8 @@
 package com.apple.inc.gateway.loadbalancer;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.DefaultResponse;
 import org.springframework.cloud.client.loadbalancer.EmptyResponse;
@@ -47,22 +49,24 @@ import java.util.concurrent.atomic.AtomicInteger;
  * This is superior to {@code Math.abs()} which returns negative for {@code MIN_VALUE}.</p>
  */
 @Slf4j
+@RequiredArgsConstructor
 public class GatewayRoundRobinLoadBalancer implements ReactorServiceInstanceLoadBalancer {
 
-    private final AtomicInteger counter = new AtomicInteger(0);
-    private final ServiceInstanceListSupplier supplier;
     private final String serviceId;
-
-    public GatewayRoundRobinLoadBalancer(ServiceInstanceListSupplier supplier, String serviceId) {
-        this.supplier = supplier;
-        this.serviceId = serviceId;
-    }
+    private final AtomicInteger counter = new AtomicInteger(0);
+    private final ObjectProvider<ServiceInstanceListSupplier> supplierProvider;
 
     @Override
     public Mono<Response<ServiceInstance>> choose(Request request) {
+        ServiceInstanceListSupplier supplier = supplierProvider.getIfAvailable();
+        if (supplier == null) {
+            return Mono.just(new EmptyResponse());
+        }
+
         return supplier.get()
                 .next()
                 .map(this::selectInstance);
+
     }
 
     private Response<ServiceInstance> selectInstance(List<ServiceInstance> instances) {

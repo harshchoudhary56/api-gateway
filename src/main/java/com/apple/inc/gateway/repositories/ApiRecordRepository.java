@@ -11,8 +11,5 @@ import reactor.core.publisher.Mono;
 @Repository
 public interface ApiRecordRepository extends ReactiveMongoRepository<ApiRecordEntity, String> {
 
-    Mono<ApiRecordEntity> persistRequest(ApiRecordEntity apiRecordEntity);
-
-    Mono<ApiRecordEntity> persistResponse(ApiRecordEntity apiRecordEntity);
 }
 

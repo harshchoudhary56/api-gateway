@@ -24,7 +24,7 @@
         <jwt-version>0.11.5</jwt-version>
         <liquibase-mongodb.version>4.29.2</liquibase-mongodb.version>
         <gson.version>2.13.2</gson.version>
-        <mapstruct.version>1.6.3</mapstruct.version>
+        <logstash.encoder.version>7.4</logstash.encoder.version>
     </properties>
 
     <dependencyManagement>
@@ -145,13 +145,11 @@
             <version>${gson.version}</version>
         </dependency>
 
-        <!-- Source: https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
         <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
-            <version>${mapstruct.version}</version>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>${logstash.encoder.version}</version>
         </dependency>
-
 	</dependencies>
 
     <distributionManagement>

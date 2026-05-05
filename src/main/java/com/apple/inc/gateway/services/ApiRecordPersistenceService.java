@@ -12,14 +12,13 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class ApiRecordPersistenceService {
 
-    private final ApiRecordMapper mapper;
     private final ApiRecordRepository apiRecordRepository;
 
     public Mono<ApiRecordEntity> persistRequest(ApiRecordData apiRecordData) {
-        return apiRecordRepository.persistRequest(mapper.toEntity(apiRecordData));
+        return apiRecordRepository.save(ApiRecordMapper.toEntity(apiRecordData));
     }
 
     public Mono<ApiRecordEntity> persistResponse(ApiRecordData apiRecordData) {
-        return apiRecordRepository.persistResponse(mapper.toEntity(apiRecordData));
+        return apiRecordRepository.save(ApiRecordMapper.toEntity(apiRecordData));
     }
 }

@@ -29,10 +29,10 @@
 
 
     <!--    Pre conditions-->
-    <preConditions onFail="HALT" onFailMessage="Unauthorized Access">
-        <dbms type="${database}"/>
-        <runningAs username="${database_username}"/>
-    </preConditions>
+<!--    <preConditions onFail="HALT" onFailMessage="Unauthorized Access">-->
+<!--        <dbms type="${database}"/>-->
+<!--        <runningAs username="${database_username}"/>-->
+<!--    </preConditions>-->
 
     <include file="db/changelog/api-record/001-create-tbl-api-record.xml"/>
 

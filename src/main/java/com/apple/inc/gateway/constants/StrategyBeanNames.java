@@ -1,4 +1,4 @@
-package com.apple.inc.gateway.constants.enums;
+package com.apple.inc.gateway.constants;
 
 public final class StrategyBeanNames {
 

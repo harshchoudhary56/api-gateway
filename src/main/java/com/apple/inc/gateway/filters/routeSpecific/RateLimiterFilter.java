@@ -1,6 +1,6 @@
 package com.apple.inc.gateway.filters.routeSpecific;
 
-import com.apple.inc.gateway.constants.enums.StrategyType;
+import com.apple.inc.gateway.constants.StrategyType;
 import com.apple.inc.gateway.ratelimiting.algorithms.RateLimitStrategy;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
