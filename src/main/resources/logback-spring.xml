@@ -4,7 +4,7 @@
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/gateway-audit.json</file>
+        <file>C:\Users\harsh.choudhary\Documents\my_projects\School Management System\Backend\api-gateway\logs\gateway-audit.json</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>logs/gateway-audit-%d{yyyy-MM-dd}.json</fileNamePattern>
             <maxHistory>30</maxHistory>
