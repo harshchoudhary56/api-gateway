@@ -25,6 +25,7 @@
         <liquibase-mongodb.version>4.29.2</liquibase-mongodb.version>
         <gson.version>2.13.2</gson.version>
         <logstash.encoder.version>7.4</logstash.encoder.version>
+        <platform.common.version>0.0.1-SNAPSHOT</platform.common.version>
     </properties>
 
     <dependencyManagement>
@@ -149,6 +150,17 @@
             <groupId>net.logstash.logback</groupId>
             <artifactId>logstash-logback-encoder</artifactId>
             <version>${logstash.encoder.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.apple.inc</groupId>
+            <artifactId>platform.common</artifactId>
+            <version>${platform.common.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
         </dependency>
 	</dependencies>
 

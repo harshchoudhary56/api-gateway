@@ -4,6 +4,7 @@ import liquibase.Liquibase;
 import liquibase.database.Database;
 import liquibase.database.DatabaseFactory;
 import liquibase.resource.ClassLoaderResourceAccessor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -25,17 +26,11 @@ import org.springframework.core.annotation.Order;
  */
 @Slf4j
 @Configuration
+@RequiredArgsConstructor
 @ConditionalOnProperty(name = "spring.liquibase.mongodb.enabled", havingValue = "true", matchIfMissing = true)
 public class LiquibaseMongoConfig {
 
-    @Value("${spring.data.mongodb.uri}")
-    private String mongoUri;
-
-    @Value("${spring.liquibase.mongodb.change-log:db/changelog/master-changelog.xml}")
-    private String changeLogFile;
-
-    @Value("${spring.liquibase.mongodb.contexts:development}")
-    private String contexts;
+    private final LiquibaseMongoProperties properties;
 
     @Bean
     @Order(1)
@@ -44,13 +39,13 @@ public class LiquibaseMongoConfig {
             log.info("Running Liquibase MongoDB migrations...");
             try {
                 Database database = DatabaseFactory.getInstance()
-                        .openDatabase(mongoUri, null, null, null, new ClassLoaderResourceAccessor());
+                        .openDatabase(properties.getUri(), null, null, null, new ClassLoaderResourceAccessor());
 
                 try (Liquibase liquibase = new Liquibase(
-                        changeLogFile,
+                        properties.getChangeLog(),
                         new ClassLoaderResourceAccessor(),
                         database)) {
-                    liquibase.update(contexts);
+                    liquibase.update(properties.getContext());
                 }
 
                 log.info("Liquibase MongoDB migrations completed successfully.");
